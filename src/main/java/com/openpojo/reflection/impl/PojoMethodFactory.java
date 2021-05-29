@@ -127,6 +127,8 @@ public class PojoMethodFactory {
       String fieldName = field.getName();
       if (fieldName.length() > 2 && fieldName.startsWith("is") && Character.isUpperCase(fieldName.charAt(2)))
         prefix.add(fieldName);
+      if (AttributeHelper.getAttributeName(field).length() > 2 && AttributeHelper.getAttributeName(field).startsWith("Is") && Character.isUpperCase(AttributeHelper.getAttributeName(field).charAt(2)))
+        prefix.add(AttributeHelper.getAttributeName(field).replaceFirst("Is", "is"));
     }
     return prefix;
   }
@@ -179,6 +181,8 @@ public class PojoMethodFactory {
     String fieldName = field.getName();
     if (fieldName.length() > 2 && fieldName.startsWith("is") && Character.isUpperCase(fieldName.charAt(2)))
       prefix.add("set" + fieldName.substring(2));
+    if (AttributeHelper.getAttributeName(field).length() > 2 && AttributeHelper.getAttributeName(field).startsWith("Is") && Character.isUpperCase(AttributeHelper.getAttributeName(field).charAt(2)))
+      prefix.add("set" + AttributeHelper.getAttributeName(field).replaceFirst("Is", "is"));
 
     return prefix;
   }
